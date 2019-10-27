@@ -7,6 +7,27 @@ require('dotenv').config()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//////////////////////////////////////////////////////////////////////////////
+// EXTRACTORS
+function getMessage(data) { return data['entry'][0]['messaging'][0]['message']['text']; }
+function getSenderID(data) { return data['entry'][0]['messaging'][0]['sender']['id']; }
+function getDatetime(data) {
+  try {
+    return data['entry'][0]['messaging'][0]['message']['nlp']['entities']['datetime'];
+  } catch {
+    return null;
+  }
+}
+
+function getLocation(data) {
+  try {
+    return data['entry'][0]['messaging'][0]['message']['nlp']['entities']['location'];
+  } catch {
+    return null;
+  }
+}
+//////////////////////////////////////////////////////////////////////////////
+
 function verifyWebhook(req, res) {
   var VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
