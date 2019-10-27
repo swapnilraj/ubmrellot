@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var axios = require('axios');
 var app = express();
+
+var weather = require('./weather');
 
 require('dotenv').config()
 
@@ -27,6 +30,19 @@ function getLocation(data) {
   }
 }
 //////////////////////////////////////////////////////////////////////////////
+// Message Utility
+function respond(id, msg) {
+  const URL =
+    `https://graph.facebook.com/v3.2/me/messages?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+
+  return axios.post(URL, {
+    messaging_type: 'RESPONSE',
+    recipient: { id },
+    message: { text: msg }
+  })
+  .catch(e => console.log(`Failed to send response to user ${id}: ${e}`));
+}
+//////////////////////////////////////////////////////////////////////////////
 
 function verifyWebhook(req, res) {
   var VERIFY_TOKEN = process.env.VERIFY_TOKEN;
@@ -45,6 +61,13 @@ function verifyWebhook(req, res) {
 function processMessageHandler(req, res) {
   // fb expects 200 for every message asap
   res.sendStatus(200);
+
+  var loc = getLocation(req.body)
+    , time = getDatetime(req.body)
+    , senderID = getSenderID(req.body);
+
+  var forecast = weather.forecast(loc, time);
+  respond(senderID, forecast);
   console.log(JSON.stringify(req.body, null, 2));
 }
 
