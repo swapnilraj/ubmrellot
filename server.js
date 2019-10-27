@@ -32,7 +32,7 @@ function getLocation(data) {
 //////////////////////////////////////////////////////////////////////////////
 // Message Utility
 function respond(id, msg) {
-  const URL =
+  var URL =
     `https://graph.facebook.com/v3.2/me/messages?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
 
   return axios.post(URL, {
@@ -45,11 +45,10 @@ function respond(id, msg) {
 //////////////////////////////////////////////////////////////////////////////
 
 function verifyWebhook(req, res) {
-  var VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-
-  var mode = req.query['hub.mode'];
-  var token = req.query['hub.verify_token'];
-  var challenge = req.query['hub.challenge'];
+  var VERIFY_TOKEN = process.env.VERIFY_TOKEN
+    , mode = req.query['hub.mode']
+    , token = req.query['hub.verify_token']
+    , challenge = req.query['hub.challenge'];
 
   if (mode && token === VERIFY_TOKEN) {
     res.status(200).send(challenge);
