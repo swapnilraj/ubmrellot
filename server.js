@@ -1,6 +1,6 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
 
 require('dotenv').config()
 
@@ -8,11 +8,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function verifyWebhook(req, res) {
-  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+  var VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
-  const mode = req.query['hub.mode'];
-  const token = req.query['hub.verify_token'];
-  const challenge = req.query['hub.challenge'];
+  var mode = req.query['hub.mode'];
+  var token = req.query['hub.verify_token'];
+  var challenge = req.query['hub.challenge'];
 
   if (mode && token === VERIFY_TOKEN) {
     res.status(200).send(challenge);
@@ -30,5 +30,4 @@ function processMessageHandler(req, res) {
 app.get('/', verifyWebhook);
 app.post('/', processMessageHandler);
 
-
-app.listen(5000, () => console.log('Express server is listening on port 5000'));
+app.listen(5000, function() { console.log('Express server is listening on port 5000') });
