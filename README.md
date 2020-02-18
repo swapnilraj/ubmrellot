@@ -1,0 +1,32 @@
+# Umbrellot
+
+Hey do you need an umbrella? Do you know that you need an umbrella?
+Ask your friend `Umbrellot`
+
+Umbrella uses NLP provided by messenger API, which is used to get the location
+and time from the user's query.
+
+The bot uses openweather API for weather information.
+
+# Pre-requisites
+
+- node
+- npm / yarn
+- ngrok
+
+# Running on local machine
+
+### ngrok
+```
+ngrok http 5000
+```
+
+Make sure that the port above is the same as the port that you run your chatbot
+server.
+
+### chatbot server
+```
+node server.js
+```
+
+This serves your bot on port 5000 by default.

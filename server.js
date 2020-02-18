@@ -57,7 +57,7 @@ function verifyWebhook(req, res) {
   }
 }
 
-function processMessageHandler(req, res) {
+async function processMessageHandler(req, res) {
   // fb expects 200 for every message asap
   res.sendStatus(200);
 
@@ -65,7 +65,7 @@ function processMessageHandler(req, res) {
     , time = getDatetime(req.body)
     , senderID = getSenderID(req.body);
 
-  var forecast = weather.forecast(loc, time);
+  var forecast = await weather.forecast(loc, time);
   respond(senderID, forecast);
   console.log(JSON.stringify(req.body, null, 2));
 }
