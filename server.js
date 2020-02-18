@@ -16,7 +16,7 @@ function getMessage(data) { return data['entry'][0]['messaging'][0]['message']['
 function getSenderID(data) { return data['entry'][0]['messaging'][0]['sender']['id']; }
 function getDatetime(data) {
   try {
-    return data['entry'][0]['messaging'][0]['message']['nlp']['entities']['datetime'];
+    return data['entry'][0]['messaging'][0]['message']['nlp']['entities']['datetime'][0]['value'];
   } catch {
     return null;
   }
@@ -24,7 +24,7 @@ function getDatetime(data) {
 
 function getLocation(data) {
   try {
-    return data['entry'][0]['messaging'][0]['message']['nlp']['entities']['location'];
+    return data['entry'][0]['messaging'][0]['message']['nlp']['entities']['location'][0]['value'];
   } catch {
     return null;
   }
