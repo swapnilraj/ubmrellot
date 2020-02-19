@@ -41,7 +41,7 @@ async function forecast(city, time) {
   var response = await axios(res.url);
       response = await response.data;
   var msg = formatForecast(response, time);
-  return msg + 'You asked for ' + time + ' but I didn\'t implement that lol';
+  return msg;
 }
 
 module.exports = { forecast };
