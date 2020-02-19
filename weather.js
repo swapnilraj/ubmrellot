@@ -22,13 +22,13 @@ function formatForecast(resp, time) {
     return resp.weather[0].description;
   }
 
-  var DIFFERENCE_OF_3HOURS = 10800100
-    , timeInEpoch = new Date(time).getTime();
+  var DIFFERENCE_OF_3HOURS = 3 * 60 * 60 + 50
+    , timeInEpoch = new Date(time).getTime() / 1000; // convert milliseconds to seconds
 
   for (var i = 0; i < resp.cnt; ++i) {
     var dayWeather = resp.list[i];
 
-    if (Math.abs(dayWeather - timeInEpoch) < DIFFERENCE_OF_3HOURS) {
+    if (Math.abs(dayWeather['dt'] - timeInEpoch) <= DIFFERENCE_OF_3HOURS) {
       return JSON.stringify(dayWeather);
     }
   }
