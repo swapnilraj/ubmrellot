@@ -73,4 +73,4 @@ async function processMessageHandler(req, res) {
 app.get('/', verifyWebhook);
 app.post('/', processMessageHandler);
 
-app.listen(5000, function() { console.log('Express server is listening on port 5000') });
+app.listen(80, function() { console.log('Express server is listening on port 5000') });
