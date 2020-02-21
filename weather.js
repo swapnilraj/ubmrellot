@@ -45,7 +45,7 @@ function formatForecast(resp, time) {
 async function forecast(city, time) {
   var res = URL(city, time);
   if (res.err) {
-    return 'Sorry could not find forecast for your query because ' + url.err;
+    return 'Sorry could not find forecast for your query because ' + res.err;
   }
 
   var response = await axios(res.url);
