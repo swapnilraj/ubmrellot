@@ -27,7 +27,8 @@ function formatForecast(resp, time) {
   }
 
   var DIFFERENCE_OF_3HOURS = 3 * 60 * 60 + 50
-    , timeInEpoch = new Date(time).getTime() / 1000; // convert milliseconds to seconds
+      // convert milliseconds to seconds
+    , timeInEpoch = new Date(time).getTime() / 1000;
 
   for (var i = 0; i < resp.cnt; ++i) {
     var dayWeather = resp.list[i];
@@ -43,7 +44,9 @@ function formatForecast(resp, time) {
 // Will fetch the forecast for the current time if time is not specified
 async function forecast(city, time) {
   var res = URL(city, time);
-  if (res.err) return 'Sorry could not find forecast for your query because ' + url.err;
+  if (res.err) {
+    return 'Sorry could not find forecast for your query because ' + url.err;
+  }
 
   var response = await axios(res.url);
       response = await response.data;
