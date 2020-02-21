@@ -1,5 +1,7 @@
 var axios = require('axios');
 
+// Decide which url to use for weather API, based on if a time is specified or
+// not
 function URL(city, time) {
   if(!city) {
     return { err: 'city missing' };
@@ -17,6 +19,8 @@ function URL(city, time) {
 
 }
 
+// Format the response from the weather API
+// If a time is specified return forecast closest to 3 hour to the time
 function formatForecast(resp, time) {
   if(!time) {
     return resp.weather[0].description;
@@ -29,11 +33,14 @@ function formatForecast(resp, time) {
     var dayWeather = resp.list[i];
 
     if (Math.abs(dayWeather['dt'] - timeInEpoch) <= DIFFERENCE_OF_3HOURS) {
-      return JSON.stringify(dayWeather);
+      return JSON.stringify(dayWeather); // JSON good
     }
   }
 }
 
+// Fetch the forecast for a city
+// Can lookup the forecast for a city for a specific time
+// Will fetch the forecast for the current time if time is not specified
 async function forecast(city, time) {
   var res = URL(city, time);
   if (res.err) return 'Sorry could not find forecast for your query because ' + url.err;
