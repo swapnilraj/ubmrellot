@@ -8,6 +8,10 @@ and time from the user's query.
 
 The bot uses openweather API for weather information.
 
+# Slides
+
+The slides for the talk are [here](https://slides.com/swapnilraj-2/chatbot-in-101-lines/)
+
 # Pre-requisites
 
 - node
