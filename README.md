@@ -22,7 +22,7 @@ The slides for the talk are [here](https://slides.com/swapnilraj-2/chatbot-in-10
 
 ### ngrok
 ```
-ngrok http 5000
+ngrok http 80
 ```
 
 Make sure that the port above is the same as the port that you run your chatbot
@@ -33,4 +33,4 @@ server.
 node server.js
 ```
 
-This serves your bot on port 5000 by default.
+This serves your bot on port 80 by default.
